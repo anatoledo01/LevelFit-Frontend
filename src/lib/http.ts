@@ -55,7 +55,14 @@ async function fetchWithRefresh(url: string, options: RequestInit = {}): Promise
 }
 
 export async function apiFetch<T>(url: string, options: RequestInit = {}): Promise<T> {
-  const res = await fetchWithRefresh(url, options);
+  let res: Response;
+  try {
+    res = await fetchWithRefresh(url, options);
+  } catch (error: any) {
+    throw new ApiError(500, 'Network Error', [
+      error.message || 'Falha de rede ou servidor indisponível',
+    ]);
+  }
 
   if (!res.ok) {
     let errorData: ApiErrorResponse;

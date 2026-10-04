@@ -64,7 +64,7 @@ export default function RegisterPage() {
               <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
               <div>
                 <p className="font-semibold">Erro no cadastro</p>
-                <p className="text-xs text-red-400/80">{registerError.messages.join(', ')}</p>
+                <p className="text-xs text-red-400/80">{registerError.messages?.join(', ') || registerError.message}</p>
               </div>
             </div>
           )}

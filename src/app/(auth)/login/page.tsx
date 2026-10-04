@@ -45,7 +45,7 @@ export default function LoginPage() {
               <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
               <div>
                 <p className="font-semibold">Falha na autenticação</p>
-                <p className="text-xs text-red-400/80">{loginError.messages.join(', ')}</p>
+                <p className="text-xs text-red-400/80">{loginError.messages?.join(', ') || loginError.message}</p>
               </div>
             </div>
           )}
