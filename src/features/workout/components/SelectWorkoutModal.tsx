@@ -37,8 +37,8 @@ export function SelectWorkoutModal({ isOpen, onClose }: SelectWorkoutModalProps)
     queryKey: ['all-workout-plans-modal'],
     queryFn: async () => {
       const [mineRes, templatesRes] = await Promise.all([
-        http.get<WorkoutPlan[]>('/workout-plans?type=mine').catch(() => ({ data: [] })),
-        http.get<WorkoutPlan[]>('/workout-plans?type=templates').catch(() => ({ data: [] })),
+        http.get<WorkoutPlan[]>('/workout-plans?scope=mine').catch(() => ({ data: [] })),
+        http.get<WorkoutPlan[]>('/workout-plans?scope=templates').catch(() => ({ data: [] })),
       ]);
       return [...(mineRes.data || []), ...(templatesRes.data || [])];
     },
