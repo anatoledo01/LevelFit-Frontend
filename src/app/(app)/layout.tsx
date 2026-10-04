@@ -32,6 +32,13 @@ const NAV_ITEMS = [
   { href: '/profile', label: 'Meu Perfil', shortLabel: 'Perfil', icon: User },
 ];
 
+const BOTTOM_NAV_ITEMS = [
+  { href: '/dashboard', label: 'Início', shortLabel: 'Início', icon: LayoutDashboard },
+  { href: '/plans', label: 'Fichas', shortLabel: 'Fichas', icon: Dumbbell },
+  { href: '/missions', label: 'Missões', shortLabel: 'Missões', icon: Target },
+  { href: '/profile', label: 'Perfil', shortLabel: 'Perfil', icon: User },
+];
+
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const { user, isAuthenticated, isLoading, logout, isLoggingOut } = useAuth();
   const router = useRouter();
@@ -224,23 +231,23 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      {/* Fixed Mobile Bottom Navbar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0d1322]/95 border-t border-amber-500/20 backdrop-blur-xl py-1.5 px-1 shadow-2xl">
-        <div className="grid grid-cols-7 gap-0.5 max-w-md mx-auto">
-          {NAV_ITEMS.map((item) => {
+      {/* Fixed Mobile Bottom Navbar (4 Principais Opções) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0d1322]/95 border-t border-amber-500/20 backdrop-blur-xl py-2 px-2 shadow-2xl">
+        <div className="grid grid-cols-4 gap-1 max-w-md mx-auto">
+          {BOTTOM_NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center justify-center gap-0.5 py-1 px-0.5 rounded-xl text-[9px] font-extrabold transition-all text-center leading-none ${
+                className={`flex flex-col items-center justify-center gap-1 py-1.5 px-1 rounded-xl text-[11px] font-bold transition-all text-center leading-none ${
                   isActive
                     ? 'text-amber-400 bg-amber-500/15 border border-amber-500/30'
                     : 'text-gray-400 hover:text-gray-200'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400 stroke-[2.5]' : 'text-gray-400'}`} />
+                <Icon className={`w-5 h-5 ${isActive ? 'text-amber-400 stroke-[2.5]' : 'text-gray-400'}`} />
                 <span className="truncate w-full text-center">{item.shortLabel}</span>
               </Link>
             );
