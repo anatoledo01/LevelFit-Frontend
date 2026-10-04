@@ -63,7 +63,7 @@ export default function ProfilePage() {
       goal: GoalEnum;
       timezone: string;
     }) => {
-      const res = await http.put<components['schemas']['UserResponseDto']>('/users/me', payload);
+      const res = await http.patch<components['schemas']['UserResponseDto']>('/users/me', payload);
       return res.data;
     },
     onSuccess: (updatedUser) => {

@@ -107,6 +107,13 @@ export const http = {
     });
     return { data };
   },
+  patch: async <T>(url: string, body?: any): Promise<{ data: T }> => {
+    const data = await apiFetch<T>(`/api${url.startsWith('/') ? url : `/${url}`}`, {
+      method: 'PATCH',
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    return { data };
+  },
   delete: async <T>(url: string): Promise<{ data: T }> => {
     const data = await apiFetch<T>(`/api${url.startsWith('/') ? url : `/${url}`}`, {
       method: 'DELETE',
