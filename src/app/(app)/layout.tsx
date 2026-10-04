@@ -35,6 +35,7 @@ const NAV_ITEMS = [
 const BOTTOM_NAV_ITEMS = [
   { href: '/dashboard', label: 'Início', shortLabel: 'Início', icon: LayoutDashboard },
   { href: '/plans', label: 'Fichas', shortLabel: 'Fichas', icon: Dumbbell },
+  { href: '/leaderboard', label: 'Ranking', shortLabel: 'Ranking', icon: Trophy },
   { href: '/missions', label: 'Missões', shortLabel: 'Missões', icon: Target },
   { href: '/profile', label: 'Perfil', shortLabel: 'Perfil', icon: User },
 ];
@@ -231,9 +232,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         {children}
       </main>
 
-      {/* Fixed Mobile Bottom Navbar (4 Principais Opções) */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0d1322]/95 border-t border-amber-500/20 backdrop-blur-xl py-2 px-2 shadow-2xl">
-        <div className="grid grid-cols-4 gap-1 max-w-md mx-auto">
+      {/* Fixed Mobile Bottom Navbar (5 Principais Opções com Ranking) */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#0d1322]/95 border-t border-amber-500/20 backdrop-blur-xl py-2 px-1 shadow-2xl">
+        <div className="grid grid-cols-5 gap-0.5 max-w-md mx-auto">
           {BOTTOM_NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
