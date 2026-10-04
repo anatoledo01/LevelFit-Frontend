@@ -350,6 +350,35 @@ export default function ProfilePage() {
             </button>
           </form>
         </div>
+
+        {/* Security / Password Section */}
+        <div className="lg:col-span-12 bg-gray-900/80 border border-gray-800 p-6 sm:p-8 rounded-3xl shadow-xl backdrop-blur-xl">
+          <div className="space-y-4">
+            <div>
+              <h2 className="text-lg font-black text-gray-100 flex items-center gap-2 mb-1">
+                <span className="text-amber-400">🔒</span> Segurança da Conta
+              </h2>
+              <p className="text-xs text-gray-400">
+                Gerencie sua senha e opções de acesso. Ao solicitar a alteração, enviaremos um link seguro para o seu e-mail cadastrado.
+              </p>
+            </div>
+            
+            <button
+              type="button"
+              onClick={async () => {
+                try {
+                  await http.post('/auth/forgot-password', { email: user.email });
+                  alert(`Link de alteração de senha enviado para: ${user.email}`);
+                } catch (err: any) {
+                  alert(err.message || 'Erro ao solicitar alteração de senha.');
+                }
+              }}
+              className="px-5 py-3 rounded-xl border border-gray-700 hover:bg-gray-800 hover:border-gray-600 text-gray-200 font-bold text-sm transition-all flex items-center gap-2"
+            >
+              Solicitar Alteração de Senha
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -107,8 +107,10 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-gray-800/80 py-8 bg-[#080b12]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <p>© 2026 LevelFit. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} LevelFit. Todos os direitos reservados.</p>
           <div className="flex items-center gap-4">
+            <span className="text-amber-500/80 font-medium">Desenvolvido por Ana Toledo</span>
+            <span className="hidden sm:inline">•</span>
             <span>Self-service • Treino + RPG</span>
           </div>
         </div>
