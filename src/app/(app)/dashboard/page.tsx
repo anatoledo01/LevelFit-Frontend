@@ -7,6 +7,8 @@ import { http } from '@/lib/http';
 import { components } from '@/types/api.generated';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { SelectWorkoutModal } from '@/features/workout/components/SelectWorkoutModal';
 import {
   Play,
   Flame,
@@ -25,6 +27,7 @@ type WorkoutSessionResponse = components['schemas']['WorkoutSessionResponseDto']
 export default function DashboardPage() {
   const { user } = useAuth();
   const router = useRouter();
+  const [isSelectWorkoutOpen, setIsSelectWorkoutOpen] = useState(false);
 
   // Check for existing active session
   const { data: activeSession } = useQuery({
@@ -127,7 +130,7 @@ export default function DashboardPage() {
               if (activeSession) {
                 router.push(`/workout/${activeSession.id}`);
               } else {
-                router.push('/plans');
+                setIsSelectWorkoutOpen(true);
               }
             }}
             className="w-full md:w-auto px-6 py-3.5 sm:px-8 sm:py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-black text-sm sm:text-base rounded-2xl shadow-xl shadow-amber-500/25 transition-all flex items-center justify-center gap-3 group"
@@ -261,6 +264,12 @@ export default function DashboardPage() {
           </Link>
         </div>
       </div>
+
+      {/* Select Workout Quick Modal */}
+      <SelectWorkoutModal
+        isOpen={isSelectWorkoutOpen}
+        onClose={() => setIsSelectWorkoutOpen(false)}
+      />
     </div>
   );
 }

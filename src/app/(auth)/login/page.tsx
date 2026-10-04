@@ -9,6 +9,7 @@ export default function LoginPage() {
   const { login, isLoggingIn, loginError } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,12 +71,6 @@ export default function LoginPage() {
                 <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider">
                   Senha
                 </label>
-                <Link
-                  href="/forgot-password"
-                  className="text-xs text-amber-400 hover:underline font-semibold"
-                >
-                  Esqueceu a senha?
-                </Link>
               </div>
               <div className="relative">
                 <input
@@ -93,6 +88,26 @@ export default function LoginPage() {
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
+              </div>
+
+              {/* Manter conectado & Esqueceu a senha */}
+              <div className="flex items-center justify-between text-xs mt-3 px-0.5">
+                <label className="flex items-center gap-2 cursor-pointer text-gray-300 hover:text-white select-none">
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="w-4 h-4 rounded bg-gray-950 border-gray-800 text-amber-500 focus:ring-amber-500 focus:ring-offset-gray-900 accent-amber-500 cursor-pointer"
+                  />
+                  <span className="font-semibold text-gray-300">Manter conectado</span>
+                </label>
+
+                <Link
+                  href="/forgot-password"
+                  className="text-amber-400 hover:underline font-semibold"
+                >
+                  Esqueceu a senha?
+                </Link>
               </div>
             </div>
 

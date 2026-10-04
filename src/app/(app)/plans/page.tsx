@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { SelectWorkoutModal } from '@/features/workout/components/SelectWorkoutModal';
 import {
   useWorkoutPlans,
   useClonePlan,
@@ -39,6 +40,7 @@ export default function PlansPage() {
   const { user } = useAuth();
   const [tab, setTab] = useState<'templates' | 'mine'>('templates');
   const [expandedPlanId, setExpandedPlanId] = useState<string | null>(null);
+  const [isSelectWorkoutOpen, setIsSelectWorkoutOpen] = useState(false);
 
   const { data: plans = [], isLoading } = useWorkoutPlans(tab);
   const { mutateAsync: clonePlan, isPending: isCloning } = useClonePlan();
@@ -104,14 +106,24 @@ export default function PlansPage() {
           </p>
         </div>
 
-        {/* Botão Criar Minha Ficha */}
-        <Link
-          href="/plans/builder"
-          className="px-4 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold rounded-xl shadow-lg shadow-amber-500/20 text-xs flex items-center gap-1.5 transition-all shrink-0"
-        >
-          <Plus className="w-4 h-4 stroke-[3]" />
-          Criar Minha Ficha do Zero
-        </Link>
+        {/* Botões de Ação */}
+        <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+          <button
+            onClick={() => setIsSelectWorkoutOpen(true)}
+            className="px-4 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-black rounded-xl shadow-lg shadow-amber-500/20 text-xs flex items-center gap-1.5 transition-all"
+          >
+            <Play className="w-4 h-4 fill-current text-black" />
+            Começar Treino
+          </button>
+
+          <Link
+            href="/plans/builder"
+            className="px-4 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 font-extrabold rounded-xl text-xs flex items-center gap-1.5 transition-all"
+          >
+            <Plus className="w-4 h-4 stroke-[3]" />
+            Criar Minha Ficha
+          </Link>
+        </div>
       </div>
 
       {/* Navegação por Abas */}
@@ -349,6 +361,12 @@ export default function PlansPage() {
           })}
         </div>
       )}
+
+      {/* Quick Select Workout Modal */}
+      <SelectWorkoutModal
+        isOpen={isSelectWorkoutOpen}
+        onClose={() => setIsSelectWorkoutOpen(false)}
+      />
     </div>
   );
 }
